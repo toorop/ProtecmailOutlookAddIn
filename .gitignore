@@ -51,3 +51,4 @@ Temporary Items
 ProtecmailOutlookAddIn/bin
 ProtecmailOutlookAddIn/obj
 ProtecmailOutlookAddIn/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
