@@ -46,3 +46,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .vs/ProtecmailOutlookAddIn/v14/.suo
+
+# bin
+ProtecmailOutlookAddIn/bin
+ProtecmailOutlookAddIn/obj
+ProtecmailOutlookAddIn/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
