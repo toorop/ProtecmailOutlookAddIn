@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ProtecmailOutlookAddIn
 {
@@ -14,10 +15,16 @@ namespace ProtecmailOutlookAddIn
 
         private ProtecmailOutlookAddIn.ProtecmailRibbon protecmailRibbon;
 
+        private  RestSharp.RestClient protecmailAPIClient;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             protecmailRibbon = Globals.Ribbons.ProtecmailRibbon;
             protecmailRibbon.SetAddin(this);
+
+            // REST client
+            protecmailAPIClient = new RestSharp.RestClient("http://reports.protecmail.com");
+
 
         }
 
@@ -66,8 +73,18 @@ namespace ProtecmailOutlookAddIn
                      mailItem = (Outlook.MailItem)selected;
                  } catch (InvalidCastException) { continue;}
 
-                 MessageBox.Show(mailItem.Raw());
-             }
+                 //MessageBox.Show(mailItem.Raw());
+
+                var request = new RestSharp.RestRequest("aj/report", RestSharp.Method.POST);
+
+                //request.AddBody(mailItem.Raw());
+                request.AddParameter("text/plain", mailItem.Raw(), RestSharp.ParameterType.RequestBody);
+                RestSharp.IRestResponse response = protecmailAPIClient.Execute(request);               
+                Debug.WriteLine(response.ResponseStatus);
+                Debug.WriteLine(response.StatusCode.ToString());
+                Debug.WriteLine(response.Content);
+
+            }
          }
     }
 
