@@ -83,9 +83,16 @@ namespace ProtecmailOutlookAddIn
                 Debug.WriteLine(response.ResponseStatus);
                 Debug.WriteLine(response.StatusCode.ToString());
                 Debug.WriteLine(response.Content);
-
             }
-         }
+            // retour client
+            if (selection.Count == 1)
+            {
+                MessageBox.Show("Spam has been successfully reported to Protecmail");
+            } else
+            {
+                MessageBox.Show("Spams has been successfully reported to Protecmail");
+            }
+        }
     }
 
 
