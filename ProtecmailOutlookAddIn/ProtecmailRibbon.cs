@@ -24,7 +24,6 @@ namespace ProtecmailOutlookAddIn
 
         private void reportSpam_Click(object sender, RibbonControlEventArgs e)
         {
-            Debug.WriteLine("bouton report spam clicked");
             addin.ReportSpams();
         }
     }

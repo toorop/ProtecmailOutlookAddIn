@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory />
-    <InstallUrlHistory />
-    <SupportUrlHistory />
+    <PublishUrlHistory>C:\Users\Toorop\Documents\Visual Studio 2015\Projects\ProtecmailOutlookAddIn\ProtecmailOutlookAddIn\pub\</PublishUrlHistory>
+    <InstallUrlHistory>
+    </InstallUrlHistory>
+    <SupportUrlHistory>https://www.protecmail.com/contact-us%3ftpl=sertech</SupportUrlHistory>
   </PropertyGroup>
 </Project>
