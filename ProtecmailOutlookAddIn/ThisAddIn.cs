@@ -68,7 +68,7 @@ namespace ProtecmailOutlookAddIn
             {
                 Outlook.MailItem mailItem;
 
-                // Il peut y avoir autre choise de seclectionné que des mails
+                // Il peut y avoir autre chose de seclectionné que des mails
                 // donc si selected ce n'est pas un mailItem on ne le traite pas
                 try
                 {
@@ -79,16 +79,32 @@ namespace ProtecmailOutlookAddIn
                 // new email
                 Email mail = new Email(mailItem.Raw());
 
+                string hdrtest="";
+                
                 // check for Protecmail header
-                /*string pmReason = mail.GetHeader("x-pm-r");
-                if (pmReason == "")
+                hdrtest = mail.GetHeader("x-pm-r");
+                if (hdrtest == "")
                 {
                     MessageBox.Show("Message with subject \"" + mail.GetHeader("subject") + "\" has not been scanned by Protecmail. If you think it should be, please contact our support: support@protecmail.com", "Protecmail", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     continue;
-                }*/
+                }
 
 
+                // white list
+                hdrtest = mail.GetHeader("x-pm-wc");
+                if (hdrtest != "")
+                {
+                    MessageBox.Show("Message with subject \"" + mail.GetHeader("subject") + "\" has been detected has spam but it's whitelisted by user. Checks your personals filter.", "Protecmail", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    continue;
+                }
 
+                // not scanned
+                hdrtest = mail.GetHeader("x-pm-scan");
+                if (hdrtest == "Not scanned. Disabled")
+                {
+                    MessageBox.Show("Message with subject \"" + mail.GetHeader("subject") + "\" has not been scanned (disabled).", "Protecmail", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    continue;
+                }
 
                 var request = new RestSharp.RestRequest("aj/report", RestSharp.Method.POST);
 
@@ -96,9 +112,6 @@ namespace ProtecmailOutlookAddIn
                 //RestSharp.IRestResponse response = protecmailAPIClient.Execute(request);
                 var response = await protecmailAPIClient.ExecuteTaskAsync(request);
                 reportsSent++;
-                /*Debug.WriteLine(response.ResponseStatus);
-                Debug.WriteLine(response.StatusCode.ToString());
-                Debug.WriteLine(response.Content);*/
             }
             // retour client
             if (reportsSent == 1)
