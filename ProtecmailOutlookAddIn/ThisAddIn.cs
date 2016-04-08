@@ -54,6 +54,9 @@ namespace ProtecmailOutlookAddIn
         public async void ReportSpams()
         {
             int reportsSent = 0;
+            bool scanned = false;
+            string hdrtest = "";
+            List<string> hdrReceived;
             Outlook.Explorer activeExplorer = this.Application.ActiveExplorer();
             Outlook.Selection selection = activeExplorer.Selection;
 
@@ -66,6 +69,7 @@ namespace ProtecmailOutlookAddIn
 
             foreach (object selected in selection)
             {
+                scanned = false;
                 Outlook.MailItem mailItem;
 
                 // Il peut y avoir autre chose de seclectionné que des mails
@@ -79,11 +83,20 @@ namespace ProtecmailOutlookAddIn
                 // new email
                 Email mail = new Email(mailItem.Raw());
 
-                string hdrtest="";
                 
-                // check for Protecmail header
-                hdrtest = mail.GetHeader("x-pm-r");
-                if (hdrtest == "")
+
+                // check for Protecmail recieved header
+                hdrReceived = mail.GetHeaders("received");
+                foreach(string hdrLine in hdrReceived)
+                {
+                    int index = hdrLine.ToLower().IndexOf(".mxf.protecmail.com");
+                    if (index > 0 )
+                    {
+                        scanned = true;
+                        break;
+                    }
+                }
+                if (!scanned)
                 {
                     MessageBox.Show("Message with subject \"" + mail.GetHeader("subject") + "\" has not been scanned by Protecmail. If you think it should be, please contact our support: support@protecmail.com", "Protecmail", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     continue;

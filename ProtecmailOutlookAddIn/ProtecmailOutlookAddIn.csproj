@@ -29,16 +29,16 @@
     <AssemblyName>ProtecmailOutlookAddIn</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
-    <IsWebBootstrapper>False</IsWebBootstrapper>
+    <IsWebBootstrapper>True</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>C:\Users\Toorop\Documents\Visual Studio 2015\Projects\ProtecmailOutlookAddIn\ProtecmailOutlookAddIn\pub\</PublishUrl>
-    <InstallUrl />
+    <PublishUrl>ftp://dl.protecmail.com/OutlookAddin/</PublishUrl>
+    <InstallUrl>http://dl.protecmail.com/OutlookAddin/</InstallUrl>
     <TargetCulture>fr</TargetCulture>
-    <ApplicationVersion>1.0.0.6</ApplicationVersion>
+    <ApplicationVersion>0.0.0.8</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>days</UpdateIntervalUnits>
+    <UpdateInterval>12</UpdateInterval>
+    <UpdateIntervalUnits>hours</UpdateIntervalUnits>
     <ProductName>ProtecmailOutlookAddIn</ProductName>
     <PublisherName>Protecmail</PublisherName>
     <SupportUrl>https://www.protecmail.com/contact-us%3ftpl=sertech</SupportUrl>
@@ -220,6 +220,7 @@
       <SubType>Code</SubType>
     </Compile>
     <None Include="ProtecmailOutlookAddIn_TemporaryKey.pfx" />
+    <None Include="spoons.pfx" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>
@@ -239,10 +240,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ProtecmailOutlookAddIn_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>spoons.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2A59AC56356AB702926245854E54AE456367223F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>36AD6A650925AD859D2EF5ED4A0C45EA45A7F0C1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
